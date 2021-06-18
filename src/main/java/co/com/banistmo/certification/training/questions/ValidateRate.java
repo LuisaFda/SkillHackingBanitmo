@@ -8,19 +8,17 @@ import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
-public class ValidateRate implements Question<Boolean> {
+public class ValidateRate implements Question<String> {
 
   public static ValidateRate withMessage() {
     return new ValidateRate();
   }
 
   @Override
-  public Boolean answeredBy(Actor actor) {
+  public String answeredBy(Actor actor) {
     actor.attemptsTo(
         WaitUntil.the(RESULT_LABEL, WebElementStateMatchers.isVisible())
     );
-    String resultPage = Text.of(RESULT_LABEL).viewedBy(actor).asString();
-    System.out.println(resultPage);
-    return true;
+    return Text.of(RESULT_LABEL).viewedBy(actor).asString().substring(0, 4);
   }
 }

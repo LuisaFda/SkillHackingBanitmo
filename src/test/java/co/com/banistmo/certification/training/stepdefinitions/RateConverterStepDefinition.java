@@ -6,6 +6,7 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.hamcrest.Matchers.containsString;
 import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 import co.com.banistmo.certification.training.exceptions.ValidationException;
@@ -50,10 +51,12 @@ public class RateConverterStepDefinition {
     );
   }
 
-  @Then("^will validate that the value of the result is reflected$")
-  public void willValidateThatTheValueOfTheResultIsReflected() {
+  @Then("^will validate that the value of the result is (.*)$")
+  public void willValidateThatTheValueOfTheResultIsReflected(String rateExpected) {
     theActorInTheSpotlight()
-        .should(seeThat(ValidateRate.withMessage())
-            .orComplainWith(ValidationException.class, VALIDATION_ERROR));
+        .should(
+            seeThat(ValidateRate.withMessage(),
+                containsString(rateExpected)
+            ).orComplainWith(ValidationException.class, VALIDATION_ERROR));
   }
 }

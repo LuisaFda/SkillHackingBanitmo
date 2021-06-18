@@ -1,4 +1,4 @@
-# ** Banistmo Contingency Channel** 
+# ** Banistmo Challenge** 
 
 ## Introduction 🚀
 This is a challenge for Banistmo
